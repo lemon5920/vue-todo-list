@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title>Event</title>
+  <meta charset="utf8">
+</head>
+<body>
+  <div id="root">
+    <input type="text" v-model="newTodo" @keyup.enter="addTodo()">
+    <button @click="addTodo()">Add Todo</button>
+    <ul>
+      <li v-for="todo in todos" v-text="todo"></li>
+    </ul>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <script>
+    new Vue({
+      el: '#root',
+
+      data: {
+        newTodo: '',
+        todos: ['上課', '寫作業', '做共筆']
+      },
+
+      methods: {
+        addTodo() {
+          this.todos.push(this.newTodo);
+          this.newTodo = '';
+        }
+      } 
+    })
+  </script>
+</body>
+</html>
