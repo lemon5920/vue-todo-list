@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title>Basic Binding</title>
+</head>
+<body>
+  
+  <div id="root"> <!-- Vue 作用域 -->
+    <input type="text" v-model="message">
+    <p>Message is: {{ message }}</p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.min.js"></script>
+
+  <script>
+    new Vue({
+      el: '#root',
+      data: {
+        message: 'Hello!'
+      }
+    })
+  </script>
+</body>
+</html>
