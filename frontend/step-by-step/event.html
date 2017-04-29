@@ -8,7 +8,10 @@
     <input type="text" v-model="newTodo" @keyup.enter="addTodo()">
     <button @click="addTodo()">Add Todo</button>
     <ul>
-      <li v-for="todo in todos" v-text="todo"></li>
+      <li v-for="todo in todos">
+        {{ todo }}
+        <button @click="removeTodo(todo)">X</button>
+      </li>
     </ul>
   </div>
 
@@ -27,6 +30,10 @@
         addTodo() {
           this.todos.push(this.newTodo);
           this.newTodo = '';
+        },
+        removeTodo(remove) {
+          let index = this.todos.indexOf(remove);
+          this.todos.splice(index, 1);
         }
       } 
     })
