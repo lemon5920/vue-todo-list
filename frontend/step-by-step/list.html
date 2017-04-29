@@ -1,12 +1,13 @@
 <html>
 <head>
-  <title>Basic Binding</title>
+  <title>List</title>
+  <meta charset="utf8">
 </head>
 <body>
-  
-  <div id="root"> <!-- Vue 作用域 -->
-    <input type="text" v-model="message">
-    <p>Message is: {{ message }}</p>
+  <div id="root">
+    <ul>
+      <li v-for="todo in todos" v-text="todo"></li>
+    </ul>
   </div>
 
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -14,8 +15,9 @@
   <script>
     new Vue({
       el: '#root',
+
       data: {
-        message: 'Hello!'
+        todos: ['上課', '寫作業', '做共筆']
       }
     })
   </script>
