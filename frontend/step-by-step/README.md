@@ -20,6 +20,13 @@
   - [Computed](https://vuejs.org/v2/api/#computed)
   - [Checkbox](https://vuejs.org/v2/guide/forms.html#Checkbox)
   - [Array filter](https://www.w3schools.com/jsref/jsref_filter.asp)
+- theme (加個主題，以 Bootstrap 4 為例)
+  - [Quick start](https://v4-alpha.getbootstrap.com/getting-started/introduction/#quick-start)
+  - [Grid system](https://v4-alpha.getbootstrap.com/layout/grid/#how-it-works)
+  - [Input group](https://v4-alpha.getbootstrap.com/components/input-group/#button-addons)
+  - [Navs](https://v4-alpha.getbootstrap.com/components/navs/#javascript-behavior)
+  - [Table](https://v4-alpha.getbootstrap.com/content/tables/#hoverable-rows)
+  - [Button](https://v4-alpha.getbootstrap.com/components/buttons/#examples)
 
 ## Vue.sj devtools
 [Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
