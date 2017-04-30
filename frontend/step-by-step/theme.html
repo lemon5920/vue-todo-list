@@ -34,76 +34,47 @@
       
       <div class="row">
         <div class="col">
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
+          <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#All" role="tab">All</a>
+              <a
+              class="nav-link"
+              :class="{active: visibility == 'all'}"
+              href="#all">All</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Active" role="tab">Active</a>
+              <a
+              class="nav-link"
+              :class="{active: visibility == 'active'}"
+              href="#active">Active</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Completed" role="tab">Completed</a>
+              <a
+              class="nav-link"
+              :class="{active: visibility == 'completed'}"
+              href="#completed">Completed</a>
             </li>
           </ul>
+        </div>
+      </div>
 
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div class="tab-pane active" id="All" role="tabpanel">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Done</th>
-                    <th>Content</th>
-                    <th>X</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="todo in all">
-                    <td><input type="checkbox" v-model="todo.done"></td>
-                    <td>{{ todo.content }}</td>
-                    <td><button class="btn btn-danger" @click="removeTodo(todo)">X</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="tab-pane" id="Active" role="tabpanel">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Done</th>
-                    <th>Content</th>
-                    <th>X</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="todo in active">
-                    <td><input type="checkbox" v-model="todo.done"></td>
-                    <td>{{ todo.content }}</td>
-                    <td><button class="btn btn-danger" @click="removeTodo(todo)">X</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="tab-pane" id="Completed" role="tabpanel">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Done</th>
-                    <th>Content</th>
-                    <th>X</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="todo in completed">
-                    <td><input type="checkbox" v-model="todo.done"></td>
-                    <td>{{ todo.content }}</td>
-                    <td><button class="btn btn-danger" @click="removeTodo(todo)">X</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Done</th>
+                <th>Content</th>
+                <th>X</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="todo in filterTodo">
+                <td><input type="checkbox" v-model="todo.done"></td>
+                <td>{{ todo.content }}</td>
+                <td><button class="btn btn-danger" @click="removeTodo(todo)">X</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -116,7 +87,23 @@
 
   <script>
 
-    new Vue({
+    var filters = {
+      all(todos) {
+        return todos;
+      },
+      active(todos) {
+        return todos.filter(function(todo) {
+          return !todo.done;
+        })
+      },
+      completed(todos) {
+        return todos.filter(function(todo) {
+          return todo.done;
+        })
+      }
+    }
+
+    var app = new Vue({
       el: '#root',
 
       data: {
@@ -125,7 +112,8 @@
           {content: '上課', done: true},
           {content: '寫作業', done: false},
           {content: '做共筆', done: false}
-          ]
+          ],
+        visibility: 'all'
       },
 
       methods: {
@@ -144,21 +132,23 @@
       },
 
       computed: {
-        all() {
-          return this.todos;
+        filterTodo() {
+          return filters[this.visibility](this.todos);
         },
-        active() {
-          return this.todos.filter(function(todo) {
-            return !todo.done;
-          })
-        },
-        completed() {
-          return this.todos.filter(function(todo) {
-            return todo.done;
-          })
-        }
+        
       }
     })
+
+    function onHashChange() {
+      let visibility = window.location.hash.replace(/#/, '');
+      if (filters[visibility]) {
+        app.visibility = visibility;
+      } else {
+        window.location.hash = '';
+        app.visibility = 'all';
+      }
+    }
+    window.addEventListener('hashchange', onHashChange)
   </script>
 </body>
 </html>
