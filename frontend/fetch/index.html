@@ -69,9 +69,9 @@
             </thead>
             <tbody>
               <tr v-for="todo in filterTodo">
-                <td><input type="checkbox" v-model="todo.done"></td>
+                <td><input type="checkbox" v-model="todo.done" @click="doneTodo(todo.id)"></td>
                 <td>{{ todo.content }}</td>
-                <td><button class="btn btn-danger" @click="removeTodo(todo)">X</button></td>
+                <td><button class="btn btn-danger" @click="removeTodo(todo.id)">X</button></td>
               </tr>
             </tbody>
           </table>
@@ -108,27 +108,68 @@
 
       data: {
         newTodo: '',
-        todos: [
-          {content: '上課', done: true},
-          {content: '寫作業', done: false},
-          {content: '做共筆', done: false}
-          ],
+        todos: [],
         visibility: 'all'
       },
 
       methods: {
         addTodo() {
-          let add = {
-            content: this.newTodo,
-            done: false
-          }
-          this.todos.push(add);
+          let here = this;
+          fetch('http://localhost:3000/todos', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({content: here.newTodo})
+          }).then(function(res) {
+            if(res.status == 200) {
+              return res.json();
+            }
+          }).then(function(json) {
+            here.todos = json;
+          }).catch(function(err) {
+            console.log("error : " + err);
+          })
           this.newTodo = '';
         },
-        removeTodo(remove) {
-          let index = this.todos.indexOf(remove);
-          this.todos.splice(index, 1);
+        removeTodo(id) {
+          let here = this;
+          fetch('http://localhost:3000/todos/' + id, {
+            method: "DELETE"
+          }).then(function(res) {
+            if(res.status == 200) {
+              return res.json();
+            }
+          }).then(function(json) {
+            here.todos = json;
+          }).catch(function(err) {
+            console.log("error : " + err);
+          })
+        },
+        doneTodo(id) {
+          let here = this;
+          fetch('http://localhost:3000/todos/done/' + id, {
+            method: "PUT"
+          }).then(function(res) {
+            if(res.status == 200) {
+              return res.json();
+            }
+          }).then(function(json) {
+            here.todos = json;
+          }).catch(function(err) {
+            console.log("error : " + err);
+          })
         }
+      },
+
+      created: function() {
+        var here = this;
+        fetch('http://localhost:3000/todos')
+        .then(function(res){
+          return res.json();
+        }).then(function(json){
+          here.todos = json;
+        })
       },
 
       computed: {
