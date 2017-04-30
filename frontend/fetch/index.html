@@ -1,0 +1,154 @@
+<html>
+<head>
+  <title>Theme</title>
+  <meta charset="utf8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+  <style>
+    .row {
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="input-group input-group-lg">
+            <input
+              type="text"
+              v-model="newTodo"
+              @keyup.enter="addTodo()"
+              class="form-control"
+              placeholder="What needs to be done?">
+            <span class="input-group-btn">
+              <button
+              @click="addTodo()"
+              class="btn btn-secondary"
+              type="button">Add</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a
+              class="nav-link"
+              :class="{active: visibility == 'all'}"
+              href="#all">All</a>
+            </li>
+            <li class="nav-item">
+              <a
+              class="nav-link"
+              :class="{active: visibility == 'active'}"
+              href="#active">Active</a>
+            </li>
+            <li class="nav-item">
+              <a
+              class="nav-link"
+              :class="{active: visibility == 'completed'}"
+              href="#completed">Completed</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Done</th>
+                <th>Content</th>
+                <th>X</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="todo in filterTodo">
+                <td><input type="checkbox" v-model="todo.done"></td>
+                <td>{{ todo.content }}</td>
+                <td><button class="btn btn-danger" @click="removeTodo(todo)">X</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <script>
+
+    var filters = {
+      all(todos) {
+        return todos;
+      },
+      active(todos) {
+        return todos.filter(function(todo) {
+          return !todo.done;
+        })
+      },
+      completed(todos) {
+        return todos.filter(function(todo) {
+          return todo.done;
+        })
+      }
+    }
+
+    var app = new Vue({
+      el: '#root',
+
+      data: {
+        newTodo: '',
+        todos: [
+          {content: '上課', done: true},
+          {content: '寫作業', done: false},
+          {content: '做共筆', done: false}
+          ],
+        visibility: 'all'
+      },
+
+      methods: {
+        addTodo() {
+          let add = {
+            content: this.newTodo,
+            done: false
+          }
+          this.todos.push(add);
+          this.newTodo = '';
+        },
+        removeTodo(remove) {
+          let index = this.todos.indexOf(remove);
+          this.todos.splice(index, 1);
+        }
+      },
+
+      computed: {
+        filterTodo() {
+          return filters[this.visibility](this.todos);
+        },
+        
+      }
+    })
+
+    function onHashChange() {
+      let visibility = window.location.hash.replace(/#/, '');
+      if (filters[visibility]) {
+        app.visibility = visibility;
+      } else {
+        window.location.hash = '';
+        app.visibility = 'all';
+      }
+    }
+    window.addEventListener('hashchange', onHashChange)
+  </script>
+</body>
+</html>
