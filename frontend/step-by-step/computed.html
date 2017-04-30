@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title>Computed</title>
+  <meta charset="utf8">
+</head>
+<body>
+  <div id="root">
+    <input type="text" v-model="newTodo" @keyup.enter="addTodo()">
+    <button @click="addTodo()">Add Todo</button>
+    <h1>All</h1>
+    <ul>
+      <li v-for="todo in todos">
+        <input type="checkbox" v-model="todo.done">
+        {{ todo.content }}
+        <button @click="removeTodo(todo)">X</button>
+      </li>
+    </ul>
+    
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <script>
+    new Vue({
+      el: '#root',
+
+      data: {
+        newTodo: '',
+        todos: [
+          {content: '上課', done: false},
+          {content: '寫作業', done: false},
+          {content: '做共筆', done: false}
+          ]
+      },
+
+      methods: {
+        addTodo() {
+          let add = {
+            content: this.newTodo,
+            done: false
+          }
+          this.todos.push(add);
+          this.newTodo = '';
+        },
+        removeTodo(remove) {
+          let index = this.todos.indexOf(remove);
+          this.todos.splice(index, 1);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
