@@ -1,6 +1,8 @@
 # Step by step
 - basic-binding (基礎 data & input 綁定)
   - [Declarative Rendering](https://vuejs.org/v2/guide/#Declarative-Rendering)
+  - [v-model](https://vuejs.org/v2/guide/forms.html#Text)
+  - [v-model 是語法糖的事](https://segmentfault.com/a/1190000008598850)
 - list (列表渲染)
   - [v-for](https://vuejs.org/v2/guide/list.html#v-for)
   - [v-text](https://vuejs.org/v2/api/#v-text)
@@ -14,6 +16,10 @@
   - [props](https://vuejs.org/v2/guide/components.html#Props)
   - [camelCase vs. kebab-case](https://cn.vuejs.org/v2/guide/components.html#camelCase-vs-kebab-case)
   - [Dynamic Props](https://vuejs.org/v2/guide/components.html#Dynamic-Props)
+- computed (監聽變化，以及提供運算後資料)
+  - [Computed](https://vuejs.org/v2/api/#computed)
+  - [Checkbox](https://vuejs.org/v2/guide/forms.html#Checkbox)
+  - [Array filter](https://www.w3schools.com/jsref/jsref_filter.asp)
 
 ## Vue.sj devtools
 [Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
