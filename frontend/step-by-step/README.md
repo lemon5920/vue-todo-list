@@ -12,10 +12,6 @@
   - [Key Modifiers](https://vuejs.org/v2/guide/events.html#Key-Modifiers)
   - [Array indexOf](https://www.w3schools.com/jsref/jsref_indexof_array.asp)
   - [Array splice](https://www.w3schools.com/jsref/jsref_splice.asp)
-- component-props (組件與資料傳遞)
-  - [props](https://vuejs.org/v2/guide/components.html#Props)
-  - [camelCase vs. kebab-case](https://cn.vuejs.org/v2/guide/components.html#camelCase-vs-kebab-case)
-  - [Dynamic Props](https://vuejs.org/v2/guide/components.html#Dynamic-Props)
 - computed (監聽變化，以及提供運算後資料)
   - [Computed](https://vuejs.org/v2/api/#computed)
   - [Checkbox](https://vuejs.org/v2/guide/forms.html#Checkbox)
@@ -27,6 +23,11 @@
   - [Navs](https://v4-alpha.getbootstrap.com/components/navs/#javascript-behavior)
   - [Table](https://v4-alpha.getbootstrap.com/content/tables/#hoverable-rows)
   - [Button](https://v4-alpha.getbootstrap.com/components/buttons/#examples)
+- component-props (組件與資料傳遞)
+  - [props](https://vuejs.org/v2/guide/components.html#Props)
+  - [camelCase vs. kebab-case](https://cn.vuejs.org/v2/guide/components.html#camelCase-vs-kebab-case)
+  - [Dynamic Props](https://vuejs.org/v2/guide/components.html#Dynamic-Props)
+  - [Named Slots](https://vuejs.org/v2/guide/components.html#Named-Slots)
 
 ## Vue.sj devtools
 [Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)

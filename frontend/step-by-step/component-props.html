@@ -2,13 +2,25 @@
 <html>
 <head>
     <title>Component and props</title>
+    <meta charset="utf8">
 </head>
 <body>
     <div id="root">
+
         <input type="text" v-model="dynamic">
+
         <my-component
         father-message="I'm your daddy."
-        :dynamic-message="dynamic"></my-component>
+        :dynamic-message="dynamic">
+
+            <p slot="header">Header Message.</p>
+
+            <p>Some message2.</p>
+
+            <p slot="footer">Footer Message.</p>
+
+        </my-component>
+
     </div>
 
     <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
@@ -19,10 +31,19 @@
 
             template: `
                 <div>
+                    <slot name="header"></slot>
+
                     <p>This is component!</p>
+
                     <p>{{ fatherMessage }}</p>
+
                     <p>{{ childMessage }}</p>
+
                     <p>{{ dynamicMessage }}</p>
+
+                    <slot>如果爸爸那裡沒有內容，我會顯示。</slot>
+                    
+                    <slot name="footer"></slot>
                 </div>
             `,
 
