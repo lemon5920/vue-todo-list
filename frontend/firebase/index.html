@@ -71,7 +71,7 @@
               <tr v-for="todo in filterTodo">
                 <td><input type="checkbox" v-model="todo.done"></td>
                 <td>{{ todo.content }}</td>
-                <td><button class="btn btn-danger" @click="removeTodo(todo)">X</button></td>
+                <td><button class="btn btn-danger" @click="removeTodo(todo._key)">X</button></td>
               </tr>
             </tbody>
           </table>
@@ -149,8 +149,7 @@
           this.newTodo = '';
         },
         removeTodo(remove) {
-          let index = this.todos.indexOf(remove);
-          this.todos.splice(index, 1);
+          database.ref('todos/' + remove).remove();
         }
       },
 
