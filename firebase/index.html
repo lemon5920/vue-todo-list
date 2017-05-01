@@ -111,7 +111,7 @@
       active(todos) {
         let result = {};
         Object.keys(todos).map(function(key, index) {
-            if(todos[key].done == true) {
+            if(todos[key].done == false) {
               result[key] = todos[key];
             }
         });
@@ -120,7 +120,7 @@
       completed(todos) {
         let result = {};
         Object.keys(todos).map(function(key, index) {
-            if(todos[key].done == false) {
+            if(todos[key].done == true) {
               result[key] = todos[key];
             }
         });
