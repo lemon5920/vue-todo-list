@@ -125,21 +125,19 @@
 
       data: {
         newTodo: '',
-        todos: [
-          {content: '上課', done: true},
-          {content: '寫作業', done: false},
-          {content: '做共筆', done: false}
-          ],
+        todos: [],
         visibility: 'all'
       },
 
       methods: {
         addTodo() {
-          let add = {
+          // Get a key for a new Todo.
+          var newTodoKey = firebase.database().ref().child('todos').push().key;
+          // Write data.
+          database.ref('todos/' + newTodoKey).set({
             content: this.newTodo,
             done: false
-          }
-          this.todos.push(add);
+          });
           this.newTodo = '';
         },
         removeTodo(remove) {
