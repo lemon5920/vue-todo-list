@@ -18,7 +18,7 @@
           <div class="input-group input-group-lg">
             <input
               type="text"
-              v-model="newTodo"
+              v-model="newTodo.content"
               @keyup.enter="addTodo()"
               class="form-control"
               placeholder="What needs to be done?">
@@ -124,21 +124,18 @@
       el: '#root',
 
       data: {
-        newTodo: '',
+        newTodo: {
+          content: '',
+          done: false
+        },
         todos: [],
         visibility: 'all'
       },
 
       methods: {
         addTodo() {
-          // Get a key for a new Todo.
-          var newTodoKey = firebase.database().ref().child('todos').push().key;
-          // Write data.
-          database.ref('todos/' + newTodoKey).set({
-            content: this.newTodo,
-            done: false
-          });
-          this.newTodo = '';
+          database.ref('todos').push(this.newTodo);
+          this.newTodo['content'] = '';
         },
         removeTodo(remove) {
           let index = this.todos.indexOf(remove);
@@ -149,8 +146,7 @@
       computed: {
         filterTodo() {
           return filters[this.visibility](this.todos);
-        },
-        
+        }
       }
     })
 
