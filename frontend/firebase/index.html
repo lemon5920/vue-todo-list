@@ -69,7 +69,7 @@
             </thead>
             <tbody>
               <tr v-for="todo in filterTodo">
-                <td><input type="checkbox" v-model="todo.done"></td>
+                <td><input type="checkbox" v-model="todo.done" @click="updateDone(todo)"></td>
                 <td>{{ todo.content }}</td>
                 <td><button class="btn btn-danger" @click="removeTodo(todo._key)">X</button></td>
               </tr>
@@ -150,6 +150,9 @@
         },
         removeTodo(remove) {
           database.ref('todos/' + remove).remove();
+        },
+        updateDone(todo) {
+          database.ref('todos/' + todo._key).update(todo);
         }
       },
 
