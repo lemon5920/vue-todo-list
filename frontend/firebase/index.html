@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Theme</title>
+  <title>Firebase</title>
   <meta charset="utf8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
@@ -109,14 +109,22 @@
         return todos;
       },
       active(todos) {
-        return todos.filter(function(todo) {
-          return !todo.done;
-        })
+        let result = {};
+        Object.keys(todos).map(function(key, index) {
+            if(todos[key].done == true) {
+              result[key] = todos[key];
+            }
+        });
+        return result;
       },
       completed(todos) {
-        return todos.filter(function(todo) {
-          return todo.done;
-        })
+        let result = {};
+        Object.keys(todos).map(function(key, index) {
+            if(todos[key].done == false) {
+              result[key] = todos[key];
+            }
+        });
+        return result;
       }
     }
 
@@ -147,6 +155,12 @@
         filterTodo() {
           return filters[this.visibility](this.todos);
         }
+      },
+
+      mounted: function() {
+        database.ref('todos').on("value", function(data) {
+           app.todos = data.val();
+        });
       }
     })
 
