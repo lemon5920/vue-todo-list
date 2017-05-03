@@ -31,7 +31,7 @@ router.delete('/:id', function(req, res, next) {
   return "error";
 });
 
-router.put('/done/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
   var id = req.params.id;
   var index = todos.findIndex(function(el) {
     return el.id == id;
