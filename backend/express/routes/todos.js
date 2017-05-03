@@ -43,4 +43,10 @@ router.patch('/:id', function(req, res, next) {
   return res.json(todos);
 });
 
+router.options('/:id', function(req, res, next) {
+  var id = req.params.id;
+  
+  return res.json(todos[id]);
+});
+
 module.exports = router;
