@@ -69,7 +69,7 @@
             </thead>
             <tbody>
               <tr v-for="todo in filterTodo">
-                <td><input type="checkbox" v-model="todo.done" @click="doneTodo(todo.id)"></td>
+                <td><input type="checkbox" v-model="todo.status" @click="doneTodo(todo.id)"></td>
                 <td>{{ todo.content }}</td>
                 <td><button class="btn btn-danger" @click="removeTodo(todo.id)">X</button></td>
               </tr>
@@ -93,12 +93,12 @@
       },
       active(todos) {
         return todos.filter(function(todo) {
-          return !todo.done;
+          return !todo.status;
         })
       },
       completed(todos) {
         return todos.filter(function(todo) {
-          return todo.done;
+          return todo.status;
         })
       }
     }
@@ -148,8 +148,12 @@
         },
         doneTodo(id) {
           let here = this;
-          fetch('http://localhost:3000/todos/done/' + id, {
-            method: "PUT"
+          fetch('http://localhost:3000/todos/' + id, {
+            method: "PATCH",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({status: 'done'})
           }).then(function(res) {
             if(res.status == 200) {
               return res.json();
