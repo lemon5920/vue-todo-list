@@ -1,5 +1,7 @@
 # Express
 
+### 感謝 [BlueT](https://github.com/BlueT) 大大寫了很多超棒的東西！
+
 [給戳](https://github.com/lemon5920/vue-todo-list/tree/master/frontend/fetch)的 Node Server，  
 沒有接資料庫，  
 重開 Server 資料會 Reset。  
@@ -89,11 +91,17 @@ JSON.stringify({
 ***
 
 ### Modify todo status
-`PUT /todos/done/:id`
+`PATCH /todos/:id`
+
+#### request
+```
+JSON.stringify({status: true})
+// status 為 checkbox 狀態，true / false 。
+```
 
 #### response
 ```
-// PUT /todos/done/3
+// PATCH /todos/3
 [
   {
     "id": 0,
