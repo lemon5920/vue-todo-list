@@ -92,14 +92,22 @@
         return todos;
       },
       active(todos) {
-        return todos.filter(function(todo) {
-          return !todo.status;
-        })
+        let result = {};
+        Object.keys(todos).map(function(key, index) {
+            if(todos[key].status == false) {
+              result[key] = todos[key];
+            }
+        });
+        return result;
       },
       completed(todos) {
-        return todos.filter(function(todo) {
-          return todo.status;
-        })
+        let result = {};
+        Object.keys(todos).map(function(key, index) {
+            if(todos[key].status == false) {
+              result[key] = todos[key];
+            }
+        });
+        return result;
       }
     }
 
