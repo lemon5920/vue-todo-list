@@ -69,7 +69,7 @@
             </thead>
             <tbody>
               <tr v-for="todo in filterTodo">
-                <td><input type="checkbox" v-model="todo.status" @click="doneTodo(todo.id, todo.status)"></td>
+                <td><input type="checkbox" v-model="todo.status" @change="doneTodo(todo.id, todo.status)"></td>
                 <td>{{ todo.content }}</td>
                 <td><button class="btn btn-danger" @click="removeTodo(todo.id)">X</button></td>
               </tr>
