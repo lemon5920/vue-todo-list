@@ -23,12 +23,12 @@
   {
     "id": 0,
     "content": "上課",
-    "done": false
+    "status": false
   },
   {
     "id": 2,
     "content": "做筆記",
-    "done": false
+    "status": false
   }
 ]
 ```
@@ -51,17 +51,17 @@ JSON.stringify({
   {
     "id": 0,
     "content": "上課",
-    "done": false
+    "status": false
   },
   {
     "id": 2,
     "content": "做筆記",
-    "done": false
+    "status": false
   },
   {
     "id": 3,
     "content": "洗衣服",
-    "done": false
+    "status": false
   }
 ]
 ```
@@ -78,12 +78,12 @@ JSON.stringify({
   {
     "id": 0,
     "content": "上課",
-    "done": false
+    "status": false
   },
   {
     "id": 3,
     "content": "洗衣服",
-    "done": false
+    "status": false
   }
 ]
 ```
@@ -106,12 +106,12 @@ JSON.stringify({status: true})
   {
     "id": 0,
     "content": "上課",
-    "done": false
+    "status": false
   },
   {
     "id": 3,
     "content": "洗衣服",
-    "done": true
+    "status": true
   }
 ]
 ```
