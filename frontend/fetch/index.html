@@ -103,7 +103,7 @@
       completed(todos) {
         let result = {};
         Object.keys(todos).map(function(key, index) {
-            if(todos[key].status == false) {
+            if(todos[key].status == true) {
               result[key] = todos[key];
             }
         });
