@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Theme</title>
+  <title>fetch</title>
   <meta charset="utf8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
@@ -68,11 +68,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="todo in filterTodo">
-                <td><input type="checkbox" v-model="todo.status" @change="doneTodo(todo.id, todo.status)"></td>
-                <td>{{ todo.content }}</td>
-                <td><button class="btn btn-danger" @click="removeTodo(todo.id)">X</button></td>
-              </tr>
+
+              <tr
+                is="table-row"
+                v-for="todo in todos"
+                v-show="todo.status == show.one || todo.status == show.two"
+                :todo="todo"
+                :key="todo.id"
+                @remove-todo="removeTodo"
+                @ch-status="doneTodo"></tr>
+
             </tbody>
           </table>
         </div>
@@ -87,27 +92,45 @@
 
   <script>
 
-    var filters = {
-      all(todos) {
-        return todos;
+    Vue.component('table-row', {
+      props: ['todo'],
+      template: `
+      <tr>
+        <td>
+          <input type="checkbox" v-model="todo.status">
+        </td>
+        <td>
+          {{ todo.content }}
+        </td>
+        <td>
+          <button class="btn btn-danger" @click="removeTodo(todo.id)">X</button>
+        </td>
+      </tr>
+      `,
+      methods: {
+        removeTodo(id) {
+          this.$emit('remove-todo', id);
+        }
       },
-      active(todos) {
-        let result = {};
-        Object.keys(todos).map(function(key, index) {
-            if(todos[key].status == false) {
-              result[key] = todos[key];
-            }
-        });
-        return result;
+      watch: {
+        'todo.status': function(val) {
+          this.$emit('ch-status', this.todo.id, val);
+        }
+      }
+    })
+
+    var switchShow = {
+      all() {
+        app.show['one'] = true;
+        app.show['two'] = false;
       },
-      completed(todos) {
-        let result = {};
-        Object.keys(todos).map(function(key, index) {
-            if(todos[key].status == true) {
-              result[key] = todos[key];
-            }
-        });
-        return result;
+      active() {
+        app.show['one'] = false;
+        app.show['two'] = false;
+      },
+      completed() {
+        app.show['one'] = true;
+        app.show['two'] = true;
       }
     }
 
@@ -117,7 +140,11 @@
       data: {
         newTodo: '',
         todos: [],
-        visibility: 'all'
+        visibility: 'all',
+        show: {
+          one: true,
+          two: false
+        }
       },
 
       methods: {
@@ -184,17 +211,16 @@
         })
       },
 
-      computed: {
-        filterTodo() {
-          return filters[this.visibility](this.todos);
-        },
-        
+      watch: {
+        visibility: function(val) {
+          switchShow[val]();
+        }
       }
     })
 
     function onHashChange() {
       let visibility = window.location.hash.replace(/#/, '');
-      if (filters[visibility]) {
+      if (switchShow[visibility]) {
         app.visibility = visibility;
       } else {
         window.location.hash = '';
