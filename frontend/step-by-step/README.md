@@ -43,3 +43,6 @@
 ## Sublime Text Package　[Install](https://packagecontrol.io/installation)
 - [Emmet](https://packagecontrol.io/packages/Emmet)
 - [Vue Syntax Highlight](https://packagecontrol.io/packages/Vue%20Syntax%20Highlight)
+
+## Visual Studio Code Extension
+- [vetur](https://github.com/octref/vetur)
