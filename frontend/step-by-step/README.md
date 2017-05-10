@@ -29,10 +29,13 @@
   - [String replace](https://www.w3schools.com/jsref/jsref_replace.asp)
   - [Binding HTML Classes](https://vuejs.org/v2/guide/class-and-style.html#Object-Syntax)
 - component-props (組件與資料傳遞)　[Demo](https://lemon5920.github.io/vue-todo-list/step-by-step/component-props)
+  - [Using Components](https://vuejs.org/v2/guide/components.html#Using-Components)
   - [props](https://vuejs.org/v2/guide/components.html#Props)
   - [camelCase vs. kebab-case](https://cn.vuejs.org/v2/guide/components.html#camelCase-vs-kebab-case)
   - [Dynamic Props](https://vuejs.org/v2/guide/components.html#Dynamic-Props)
   - [Named Slots](https://vuejs.org/v2/guide/components.html#Named-Slots)
+  - [Composing Components](https://vuejs.org/v2/guide/components.html#Composing-Components)
+  - [Custom Events](https://vuejs.org/v2/guide/components.html#Composing-Components)
 
 ## Vue.sj devtools　[Repo](https://github.com/vuejs/vue-devtools)
 [Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
