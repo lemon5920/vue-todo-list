@@ -87,17 +87,17 @@
 
   <script>
 
-    var filters = {
-      all(todos) {
-        return todos;
+    var filterMethods = {
+      all(list) {
+        return list;
       },
-      active(todos) {
-        return todos.filter(function(todo) {
+      active(list) {
+        return list.filter(function(todo) {
           return !todo.done;
         })
       },
-      completed(todos) {
-        return todos.filter(function(todo) {
+      completed(list) {
+        return list.filter(function(todo) {
           return todo.done;
         })
       }
@@ -108,7 +108,7 @@
 
       data: {
         newTodo: '',
-        todos: [
+        list: [
           {content: '上課', done: true},
           {content: '寫作業', done: false},
           {content: '做共筆', done: false}
@@ -122,18 +122,18 @@
             content: this.newTodo,
             done: false
           }
-          this.todos.push(add);
+          this.list.push(add);
           this.newTodo = '';
         },
         removeTodo(remove) {
-          let index = this.todos.indexOf(remove);
-          this.todos.splice(index, 1);
+          let index = this.list.indexOf(remove);
+          this.list.splice(index, 1);
         }
       },
 
       computed: {
         filterTodo() {
-          return filters[this.visibility](this.todos);
+          return filters[this.visibility](this.list);
         },
         
       }
